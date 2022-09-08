@@ -1,0 +1,16 @@
+{
+  "name": "noted-api",
+  "version": "1.0.0",
+  "description": "API noted",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon ./src/server.js"
+  },
+  "author": "Lucas",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "mongoose": "^6.5.5"
+  }
+}
