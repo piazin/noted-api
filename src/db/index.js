@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const { mongo_url } = require('../config');
 
 mongoose
-  .connect('mongodb://localhost:27017/noted_db')
+  .connect(mongo_url)
   .then(() => console.log('connected db'))
   .catch(console.error());
 
