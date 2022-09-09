@@ -5,9 +5,7 @@ const { jwt_secret } = require('../config');
 
 module.exports = (req, res, next) => {
   if (!req.headers.authorization)
-    return res
-      .status(400)
-      .json({ status: 400, error: user_error.invalid_params });
+    return res.status(400).json({ status: 400, error: 'invalid token' });
 
   const token = req.headers.authorization.split(' ')[1];
 

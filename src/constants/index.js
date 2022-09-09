@@ -11,5 +11,9 @@ module.exports = {
     E404: 'no notes around here',
   },
 
+  note_sucess: {
+    delete: 'sucesso ao deletar',
+  },
+
   E500: 'Internal error, please try again',
 };
