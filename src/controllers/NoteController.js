@@ -22,6 +22,11 @@ module.exports = {
     var { title, body } = req.body;
     var id = req.params.id;
 
+    if (!isIdValid(id))
+      return res
+        .status(400)
+        .json({ status: 400, error: user_error.invalid_params });
+
     try {
       let note = await Note.findById(id);
 
@@ -96,6 +101,21 @@ module.exports = {
       isOwner(req.user._id, note.author)
         ? res.status(200).json(note)
         : res.status(403).json({ status: 403, error: user_error.unauthorized });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ status: 500, error: E500 });
+    }
+  },
+
+  async search(req, res) {
+    var { query } = req.query;
+
+    try {
+      let notes = await Note.find({ author: req.user._id }).find({
+        $text: { $search: query },
+      });
+
+      res.status(200).json(notes);
     } catch (error) {
       console.error(error);
       res.status(500).json({ status: 500, error: E500 });

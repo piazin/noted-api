@@ -8,6 +8,8 @@ router
   .get(auth, NoteController.findAll)
   .post(checkNote, auth, NoteController.create);
 
+router.get('/search', auth, NoteController.search);
+
 router
   .route('/:id')
   .get(auth, NoteController.findById)

@@ -8,8 +8,6 @@ exports.checkNote = (req, res, next) => {
 
   var { title, body } = req.body;
 
-  console.log(!(title, body));
-
   if (!title || !body)
     return res
       .status(400)
