@@ -1,6 +1,9 @@
 const Note = require('../models/Note');
-const { user_error, E500 } = require('../constants');
+const { user_error, E500, E404, note_error } = require('../constants');
 const isOwner = require('../utils/isOwner');
+const {
+  Types: { ObjectId },
+} = require('mongoose');
 
 module.exports = {
   async create(req, res) {
@@ -55,7 +58,15 @@ module.exports = {
     const id = req.params.id;
 
     try {
+      if (!ObjectId.isValid(id))
+        return res
+          .status(400)
+          .json({ status: 400, error: user_error.invalid_params });
+
       let note = await Note.findById(id);
+
+      if (!note)
+        return res.status(404).json({ status: 404, error: note_error.E404 });
 
       isOwner(req.user._id, note.author)
         ? res.status(200).json(note)

@@ -1,11 +1,12 @@
 const router = require('express').Router();
 const NoteController = require('../controllers/NoteController');
-const auth = require('../middleware/auth');
+const auth = require('../middlewares/auth');
+const { checkNote } = require('../middlewares/validateReqBody');
 
 router
   .route('/')
   .get(auth, NoteController.findAll)
-  .post(auth, NoteController.create);
+  .post(checkNote, auth, NoteController.create);
 
 router
   .route('/:id')
