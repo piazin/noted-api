@@ -22,7 +22,7 @@ const UserShema = new mongoose.Schema({
   },
 });
 
-UserShema.pre('save', (next) => {
+UserShema.pre('save', function (next) {
   if (this.isNew || this.isModified('password')) {
     bcrypt.hash(this.password, 10, (err, hashPassword) => {
       if (err) {
@@ -32,7 +32,17 @@ UserShema.pre('save', (next) => {
         next();
       }
     });
+  } else {
+    next();
   }
 });
 
-module.exports = mongoose.Model('User', UserShema);
+UserShema.methods.isCorrectPassword = async function (password, cb) {
+  bcrypt.compare(password, this.password, (err, same) => {
+    if (err) cb(err);
+
+    cb(err, same);
+  });
+};
+
+module.exports = mongoose.model('User', UserShema);
