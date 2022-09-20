@@ -4,7 +4,7 @@
   "description": "API noted",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon ./src/server.js"
+    "start": "node ./src/server.js"
   },
   "author": "Lucas",
   "license": "ISC",
