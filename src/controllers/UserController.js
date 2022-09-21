@@ -51,12 +51,12 @@ module.exports = {
   async validateToken(req, res) {
     var token = req.body;
 
-    if (!token) return false;
+    if (!token) return res.status(401).send(false);
 
     jwt.verify(token, jwt_secret, (err, decode) => {
-      if (err) return false;
+      if (err) return res.status(401).send(false);
 
-      return true;
+      return res.status(200).send(true);
     });
   },
 };
