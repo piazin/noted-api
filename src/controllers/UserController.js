@@ -40,6 +40,8 @@ module.exports = {
 
         var token = jwt.sign({ email }, jwt_secret, { expiresIn: '1d' });
 
+        user = { id, name, email, created_at, updated_at };
+
         res.status(200).json({ user, token });
       });
     } catch (error) {
