@@ -40,9 +40,15 @@ module.exports = {
 
         var token = jwt.sign({ email }, jwt_secret, { expiresIn: '1d' });
 
-        user = { id, name, email, created_at, updated_at };
+        var treated_user = {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          updated_at: user.updated_at,
+          created_at: user.created_at,
+        };
 
-        res.status(200).json({ user, token });
+        res.status(200).json({ user: treated_user, token });
       });
     } catch (error) {
       console.log(error);
