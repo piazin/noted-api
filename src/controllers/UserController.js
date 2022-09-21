@@ -47,4 +47,16 @@ module.exports = {
       res.status(500).json({ status: 500, error: E500 });
     }
   },
+
+  async validateToken(req, res) {
+    var token = req.body;
+
+    if (!token) return false;
+
+    jwt.verify(token, jwt_secret, (err, decode) => {
+      if (err) return false;
+
+      return true;
+    });
+  },
 };
