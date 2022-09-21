@@ -48,8 +48,8 @@ module.exports = {
     }
   },
 
-  async validateToken(req, res) {
-    var token = req.body;
+  validateToken(req, res) {
+    var { token } = req.body;
 
     if (!token) return res.status(401).send(false);
 

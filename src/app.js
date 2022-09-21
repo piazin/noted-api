@@ -7,9 +7,9 @@ const note_router = require('./routes/note.routes');
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
 
 app.use((err, req, res, next) => {
   if (!err) return next();
